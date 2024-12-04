@@ -39,3 +39,25 @@ inputArr.forEach((row) => {
 
 console.timeEnd("Time");
 console.log("Part 1 answer: ", sum);
+
+// --- Part 2 ---
+console.time("Time 2");
+// Reset sum
+sum = 0;
+inputArr.forEach((row) => {
+  if (isSafe(row)) {
+    sum++;
+    return
+  } else {
+    for (let i = 0; i < row.length; i++) {
+      const _row = [...row]
+      _row.splice(i, 1)
+      if (isSafe(_row)) {
+        sum++
+        break
+      }
+    }
+  }
+});
+console.timeEnd("Time 2");
+console.log("Part 2 answer: ", sum);
