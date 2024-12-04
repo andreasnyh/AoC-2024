@@ -13,25 +13,22 @@ function isRising(arr) {
 }
 
 function isSafe(arr) {
-  const isArrRising = isRising(arr);
   const inOrder = arr.every((num, index) => {
     if (index === 0) return true;
-    if (isArrRising) {
+    if (isRising(arr)) {
       return num >= arr[index - 1];
-    } else {
-      return num <= arr[index - 1];
     }
+
+    return num <= arr[index - 1];
   });
 
   if (!inOrder) return false;
 
-  const isChangeSafe = arr.every((num, index) => {
+  return arr.every((num, index) => {
     if (index === 0) return true;
     const diff = Math.abs(num - arr[index - 1]);
     return diff >= 1 && diff <= 3;
   });
-
-  return isChangeSafe;
 }
 
 inputArr.forEach((row) => {
