@@ -12,21 +12,21 @@ function isRising(arr) {
   return arr[0] < arr[1];
 }
 
-function isSafe(arr) {
-  const inOrder = arr.every((num, index) => {
+function isSafe(row) {
+  const inOrder = row.every((num, index) => {
     if (index === 0) return true;
-    if (isRising(arr)) {
-      return num >= arr[index - 1];
+    if (isRising(row)) {
+      return num >= row[index - 1];
     }
 
-    return num <= arr[index - 1];
+    return num <= row[index - 1];
   });
 
   if (!inOrder) return false;
 
-  return arr.every((num, index) => {
+  return row.every((num, index) => {
     if (index === 0) return true;
-    const diff = Math.abs(num - arr[index - 1]);
+    const diff = Math.abs(num - row[index - 1]);
     return diff >= 1 && diff <= 3;
   });
 }
