@@ -13,22 +13,22 @@ function isRising(arr) {
 }
 
 function isSafe(row) {
-  const inOrder = row.every((num, index) => {
-    if (index === 0) return true;
-    if (isRising(row)) {
-      return num >= row[index - 1];
-    }
+  const isRisingFlag = isRising(row);
 
-    return num <= row[index - 1];
-  });
+  for (let index = 1; index < row.length; index++) {
+    const num = row[index];
+    const prevNum = row[index - 1];
 
-  if (!inOrder) return false;
+    // Check order
+    if (isRisingFlag && num < prevNum) return false;
+    if (!isRisingFlag && num > prevNum) return false;
 
-  return row.every((num, index) => {
-    if (index === 0) return true;
-    const diff = Math.abs(num - row[index - 1]);
-    return diff >= 1 && diff <= 3;
-  });
+    // Check difference
+    const diff = Math.abs(num - prevNum);
+    if (diff < 1 || diff > 3) return false;
+  }
+
+  return true;
 }
 
 inputArr.forEach((row) => {
